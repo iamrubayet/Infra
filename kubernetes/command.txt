@@ -1,0 +1,88 @@
+kubectl config current-context
+
+kubectl apply -f grade-submission-portal-pod.yaml
+
+kubectl get pods
+
+kubectl describe pod grade-submission-portal
+
+kubectl logs grade-submission-portal
+
+
+kubectl logs -f grade-submission-portal
+
+kubectl port-forward grade-submission-portal 5001:5001
+
+kubectl delete pod grade-submission-portal
+
+kubectl delete pods --all
+
+kubectl create namespace grade-submission
+
+kubectl apply -f . -n grade-submission
+
+kubectl get pods -n grade-submission
+
+kubectl delete pods --all -n grade-submission
+
+
+kubectl delete namespace grade-submission
+
+kubectl get deployments -n grade-submission
+
+kubectl rollout undo deployment/grade-submission-api -n grade-submission
+
+kubectl delete deployments --all -n grade-submission
+
+kubectl get services -n grade-submission
+
+kubectl delete services --all -n grade-submission
+
+kubectl get statefulsets -n grade-submission
+
+kubectl delete statefulsets --all -n grade-submission
+
+kubectl get pvc -n grade-submission
+
+kubectl delete pvc --all -n grade-submission
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml && kubectl patch deployment metrics-server -n kube-system --type='json' -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value":"--kubelet-insecure-tls"}]'
+
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+
+
+helm template .
+
+helm package .
+
+helm install grade-submission-portal ./grade-submission-portal-0.1.0.tgz --namespace grade-submission --create-namespace
+
+helm uninstall grade-submission-portal -n grade-submission
+
+helm list -A
+
+helm upgrade grade-submission-portal ./grade-submission-portal-0.1.0.tgz -n grade-submission
+
+helm rollback grade-submission-portal 1 -n grade-submission
+
+
+helm install grade-submission-portal . -n grade-submission 
+helm upgrade grade-submission-portal . -n grade-submission
+helm install grade-submission-api . -n grade-submission 
+helm upgrade grade-submission-api . -n grade-submission
+helm install mongodb bitnami/mongodb ---version=18.0.5 -f values.yaml -n mongodb
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm search repo bitnami/mongodb
+helm repo remove bitnami
+
+helm repo add mongodb https://mongodb.github.io/helm-charts
+helm repo update
+helm search repo mongodb/community-mongodb
+helm repo remove mongodb
+
+eksctl create cluster --name my-cluster --region us-east-1 --nodes 2 --node-type t3.medium
+
+eksctl delete cluster --name my-cluster --region us-east-1
