@@ -1,0 +1,6 @@
+## configure exporter here
+mysql:
+  host: "mysql.database-monitoring.svc.cluster.local"
+  port: 3306
+  user: "bXlzcWx1c2Vy"
+  password: "password"
